@@ -1,0 +1,41 @@
+{
+  "name": "blog-api",
+  "version": "1.0.0",
+  "description": "An example of Blog API using NodeJS, Mongoose, Express and JWT",
+  "main": "index.js",
+  "scripts": {
+    "coverage": "jest --config ./jest.config.json --collectCoverage --coverageDirectory=./coverage tests",
+    "test:pact": "npx jest --testTimeout 30000 tests/provider.pact.spec.js"
+  },
+  "keywords": [
+    "Blog",
+    "API",
+    "Express",
+    "Example",
+    "Mongoose"
+  ],
+  "author": "Donald Le",
+  "license": "MIT",
+  "dependencies": {
+    "auto-bind": "^1.1.0",
+    "body-parser": "^1.17.1",
+    "debug": "^2.6.6",
+    "express": "latest",
+    "express-validator": "^3.2.0",
+    "extend-error": "0.0.2",
+    "http-status-codes": "^1.1.6",
+    "jest": "^29.0.3",
+    "jest-junit": "^14.0.1",
+    "jsonwebtoken": "^7.4.0",
+    "mongoose": "^6.1.1",
+    "passport": "^0.3.2",
+    "passport-jwt": "^2.2.1",
+    "passport-local": "latest",
+    "passport-strategy": "latest",
+    "should": "^11.2.1",
+    "solclientjs": "^10.12.0",
+    "supertest": "^6.2.4",
+    "validator": "^7.0.0",
+    "@pact-foundation/pact": "^10.1.1"
+  }
+}
