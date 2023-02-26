@@ -1,11 +1,11 @@
-const path = require("path")
 const { MessageProviderPact, providerWithMetadata } = require("@pact-foundation/pact")
 
 // 1 Messaging integration client
   function createBlog() {
     return new Promise((resolve, reject) => {
       resolve({
-        authorId: "3242424242",
+        firstName: "Danilo",
+        lastName:"Enketia",
         name: "A great blog",
       });
     });
@@ -16,7 +16,7 @@ describe("Message provider tests", () => {
   const p = new MessageProviderPact({
     messageProviders: {
       'a noti for a new blog post is created': providerWithMetadata(() => createBlog(),{
-        topic: 'services/blogService'
+        topic: 'service/blog/authorId/blogId/new'
       }),
     },
       stateHandlers: {

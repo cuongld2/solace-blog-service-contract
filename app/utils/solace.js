@@ -1,8 +1,9 @@
 
-var TopicPublisher = function (solaceModule, topicName, newPublishedBlog) {
+var TopicPublisher = function (solaceModule, topicName, newPublishedBlog,userInfo) {
     'use strict';
     var solace = solaceModule;
     var blog=newPublishedBlog;
+    var user=userInfo;
     var publisher = {};
     publisher.session = null;
     publisher.topicName = topicName;
@@ -76,7 +77,7 @@ var TopicPublisher = function (solaceModule, topicName, newPublishedBlog) {
     // Publishes one message
     publisher.publish = function () {
         if (publisher.session !== null) {
-            var messageText = `A new blog has been published with blog title is "${blog.title}" and author id is "${blog.authorId}"`;
+            var messageText = `A new blog has been published with blog title is "${blog.title}" and author name is "${user.firstName} ${user.lastName}".`;
             var message = solace.SolclientFactory.createMessage();
             message.setDestination(solace.SolclientFactory.createTopicDestination(publisher.topicName));
             message.setBinaryAttachment(messageText);

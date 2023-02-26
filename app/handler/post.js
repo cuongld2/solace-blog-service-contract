@@ -3,6 +3,7 @@ const BlogPostModel = require(APP_MODEL_PATH + 'post').BlogPostModel;
 const ValidationError = require(APP_ERROR_PATH + 'validation');
 const NotFoundError = require(APP_ERROR_PATH + 'not-found');
 const BaseAutoBindedClass = require(APP_BASE_PACKAGE_PATH + 'base-autobind');
+const UserModel = require(APP_MODEL_PATH + 'user').UserModel;
 const TopicPublisher = require('../utils/solace')
 var solace = require('solclientjs').production;
 
@@ -64,8 +65,15 @@ class BlogPostHandler extends BaseAutoBindedClass {
             .then((blog) => {
                 blog.save();
                 // notiNewBlog()
-                const publisher = TopicPublisher(solace,'services/blogService',blog)
-                publisher.run(process.argv);
+                UserModel.findById(blog.authorId, function (err, user) {
+                    if (user === null) {
+
+                    } else {
+                        const publisher = TopicPublisher(solace,`service/blog/${blog.authorId}/${blog._id}/new`,blog,user)
+                        publisher.run(process.argv);
+                        
+                    }
+                });
                 return blog;
             })
             .then((saved) => {
